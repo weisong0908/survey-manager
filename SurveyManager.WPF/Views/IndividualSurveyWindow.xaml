@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SurveyManager.WPF.Views"
         mc:Ignorable="d"
-        Title="IndividualSurveyWindow" Height="450" Width="600" ResizeMode="NoResize">
+        Title="{Binding SurveyName}" Height="450" Width="600" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>
@@ -19,14 +19,13 @@
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="5 0">
-            <GroupBox Header="Preparation: Template for data" Margin="5">
+            <GroupBox Header="Preparation: Templates for survey and report data" Margin="5">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock VerticalAlignment="Center" Margin="3" Text="Generate template file for"/>
-                    <Button Width="100" Margin="3" Click="GenerateSurveyDataTemplate">Survey data</Button>
-                    <Button Width="100" Margin="3" Click="GenerateReportDataTemplate">Report data</Button>
+                    <TextBlock VerticalAlignment="Center" Margin="3" Text="Export template files"/>
+                    <Button Width="100" Margin="3" Click="ExportTemplate">Export</Button>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="Step 1: Import data for processing" Margin="5">
+            <GroupBox Header="Step 1: Import survey and report data for processing" Margin="5">
                 <StackPanel>
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Survey data (.csv):"/>
@@ -36,11 +35,6 @@
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Report data (.csv):"/>
                         <Button DockPanel.Dock="Right" Width="100" Margin="3" Click="ImportReportData">Browse</Button>
-                        <TextBox Margin="3"/>
-                    </DockPanel>
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Report layout template (.dotx):"/>
-                        <Button DockPanel.Dock="Right" Width="100" Margin="3" Click="ImportReportTemplate">Browse</Button>
                         <TextBox Margin="3"/>
                     </DockPanel>
                 </StackPanel>

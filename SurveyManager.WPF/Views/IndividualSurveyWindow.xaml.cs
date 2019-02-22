@@ -22,19 +22,16 @@ namespace SurveyManager.WPF.Views
     {
         public IndividualSurveyWindowViewModel ViewModel { get { return DataContext as IndividualSurveyWindowViewModel; } set { DataContext = value; } }
 
-        public IndividualSurveyWindow()
+        public IndividualSurveyWindow(string surveyName)
         {
             InitializeComponent();
+
+            ViewModel = new IndividualSurveyWindowViewModel(surveyName);
         }
 
-        private void GenerateSurveyDataTemplate(object sender, RoutedEventArgs e)
+        private void ExportTemplate(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void GenerateReportDataTemplate(object sender, RoutedEventArgs e)
-        {
-
+            ViewModel.ExportTemplates();
         }
 
         private void ImportSurveyData(object sender, RoutedEventArgs e)
@@ -43,11 +40,6 @@ namespace SurveyManager.WPF.Views
         }
 
         private void ImportReportData(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ImportReportTemplate(object sender, RoutedEventArgs e)
         {
 
         }

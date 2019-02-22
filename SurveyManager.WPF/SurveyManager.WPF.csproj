@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,6 +57,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\SurveyName.cs" />
+    <Compile Include="Services\TemplateService.cs" />
+    <Compile Include="Services\WindowService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\IndividualSurveyWindowViewModel.cs" />
     <Compile Include="ViewModels\SurveysWindowViewModel.cs" />

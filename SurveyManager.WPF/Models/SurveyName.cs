@@ -8,7 +8,7 @@ namespace SurveyManager.WPF.Models
 {
     public static class SurveyName
     {
-        public static string StudentSurveyOnLecturer = "CU Student Survey on Lecturer";
-        public static string UnitAndLecturerSurvey = "CC Unit and Lecturer Survey";
+        public const string StudentSurveyOnLecturer = "CU Student Survey on Lecturer";
+        public const string UnitAndLecturerSurvey = "CC Unit and Lecturer Survey";
     }
 }
