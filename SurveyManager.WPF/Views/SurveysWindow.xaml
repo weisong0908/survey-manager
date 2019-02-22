@@ -22,7 +22,7 @@
             <TextBlock Padding="0 5" FontWeight="Bold" FontSize="16">
                 Student Survey on Lecturer
             </TextBlock>
-            <Button Content="Student Survey on Lecturer"/>
+            <Button Content="Student Survey on Lecturer" Click="GoToStudentSurveyOnLecturerWindow"/>
             <StackPanel Margin="0 5">
                 <TextBlock TextWrapping="Wrap" Padding="0 2">
                     This survey is for all Curtin University units every trimester/semester
@@ -36,7 +36,7 @@
             <TextBlock Padding="0 5" FontWeight="Bold" FontSize="16">
                 Unit and Lecturer Survey
             </TextBlock>
-            <Button Content="Student Survey on Lecturer"/>
+            <Button Content="Student Survey on Lecturer" Click="GoToUnitAndLecturerSurveyWindow"/>
             <StackPanel Margin="0 5">
                 <TextBlock TextWrapping="Wrap" Padding="0 2">
                     This survey is for all Curtin College units every trimester
