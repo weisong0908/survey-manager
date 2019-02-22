@@ -30,7 +30,7 @@
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Survey data (.csv):"/>
                         <Button DockPanel.Dock="Right" Width="100" Margin="3" Click="ImportSurveyData">Browse</Button>
-                        <TextBox Margin="3"/>
+                        <TextBox Margin="3" Text="{Binding SurveyDataLocation}"/>
                     </DockPanel>
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Report data (.csv):"/>

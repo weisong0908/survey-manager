@@ -36,12 +36,12 @@ namespace SurveyManager.WPF.Views
 
         private void ImportSurveyData(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.ImportSurveyData();
         }
 
         private void ImportReportData(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.ImportReportData();
         }
 
         private void GenerateReport(object sender, RoutedEventArgs e)

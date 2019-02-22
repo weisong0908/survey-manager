@@ -57,7 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\SurveyName.cs" />
-    <Compile Include="Services\TemplateService.cs" />
+    <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\WindowService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\IndividualSurveyWindowViewModel.cs" />

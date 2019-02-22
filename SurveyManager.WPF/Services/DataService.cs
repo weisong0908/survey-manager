@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace SurveyManager.WPF.Services
 {
-    public class TemplateService
+    public class DataService
     {
         private readonly string templateParentFolder;
         private readonly string surveyDataTemplateFileName = "SurveyDataTemplate.csv";
@@ -19,8 +19,10 @@ namespace SurveyManager.WPF.Services
         public string SurveyDataTemplate { get; private set; }
         public string ReportDataTemplate { get; private set; }
         public string ReportTemplate { get; private set; }
+        public string SurveyData { get; private set; }
+        public string ReportData { get; private set; }
 
-        public TemplateService(string surveyName)
+        public DataService(string surveyName)
         {
             switch (surveyName)
             {
@@ -47,6 +49,35 @@ namespace SurveyManager.WPF.Services
                 File.Copy(SurveyDataTemplate, Path.Combine(folderBrowserDialog.SelectedPath, surveyDataTemplateFileName), overwrite: true);
                 File.Copy(ReportDataTemplate, Path.Combine(folderBrowserDialog.SelectedPath, reportDataTemplateFileName), overwrite: true);
             }
+        }
+
+        public string ImportData(DataType dataType)
+        {
+            var fileDialog = new OpenFileDialog
+            {
+                Filter = "csv files (*.csv)|*.csv"
+            };
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                switch (dataType)
+                {
+                    case DataType.SurveyData:
+                        SurveyData = fileDialog.FileName;
+                        break;
+                    case DataType.ReportData:
+                        ReportData = fileDialog.FileName;
+                        break;
+                }
+                return fileDialog.FileName;
+            }
+
+            return string.Empty;
+        }
+
+        public enum DataType
+        {
+            SurveyData, ReportData
         }
     }
 }
