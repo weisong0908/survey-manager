@@ -55,7 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\SurveyName.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\IndividualSurveyWindowViewModel.cs" />
     <Compile Include="ViewModels\SurveysWindowViewModel.cs" />
     <Compile Include="Views\IndividualSurveyWindow.xaml.cs">
       <DependentUpon>IndividualSurveyWindow.xaml</DependentUpon>

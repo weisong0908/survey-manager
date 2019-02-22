@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SurveyManager.WPF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,8 @@ namespace SurveyManager.WPF.Views
     /// </summary>
     public partial class IndividualSurveyWindow : Window
     {
+        public IndividualSurveyWindowViewModel ViewModel { get { return DataContext as IndividualSurveyWindowViewModel; } set { DataContext = value; } }
+
         public IndividualSurveyWindow()
         {
             InitializeComponent();
