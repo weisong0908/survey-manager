@@ -1,0 +1,65 @@
+﻿<Window x:Class="SurveyManager.WPF.Views.IndividualSurveyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SurveyManager.WPF.Views"
+        mc:Ignorable="d"
+        Title="IndividualSurveyWindow" Height="450" Width="600" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="5 0">
+            <GroupBox Header="Preparation: Template for data" Margin="5">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Margin="3" Text="Generate template file for"/>
+                    <Button Width="100" Margin="3" Click="GenerateSurveyDataTemplate">Survey data</Button>
+                    <Button Width="100" Margin="3" Click="GenerateReportDataTemplate">Report data</Button>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Step 1: Import data for processing" Margin="5">
+                <StackPanel>
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Survey data (.csv):"/>
+                        <Button DockPanel.Dock="Right" Width="100" Margin="3" Click="ImportSurveyData">Browse</Button>
+                        <TextBox Margin="3"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Report data (.csv):"/>
+                        <Button DockPanel.Dock="Right" Width="100" Margin="3" Click="ImportReportData">Browse</Button>
+                        <TextBox Margin="3"/>
+                    </DockPanel>
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Report layout template (.dotx):"/>
+                        <Button DockPanel.Dock="Right" Width="100" Margin="3" Click="ImportReportTemplate">Browse</Button>
+                        <TextBox Margin="3"/>
+                    </DockPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Step 2: Location to export the survey reports" Margin="5">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Location for survey reports:"/>
+                    <Button DockPanel.Dock="Right" Width="100" Margin="3">Browse</Button>
+                    <TextBox Margin="3"/>
+                </DockPanel>
+            </GroupBox>
+            <GroupBox Header="Step 3: Generate survey report" Margin="5">
+                <Button Margin="3" Width="100" Click="GenerateReport">Start</Button>
+            </GroupBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock/>
+            <TextBlock/>
+            <ProgressBar/>
+        </StackPanel>
+    </Grid>
+</Window>
