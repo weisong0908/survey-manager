@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="Views\SurveysWindow.xaml.cs">
       <DependentUpon>SurveysWindow.xaml</DependentUpon>
     </Compile>
