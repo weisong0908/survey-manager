@@ -9,7 +9,7 @@ namespace SurveyManager.WPF.ViewModels
 {
     public class IndividualSurveyWindowViewModel : BaseViewModel
     {
-        private readonly DataService dataService;
+        private readonly FileService fileService;
 
         public string SurveyName { get; private set; }
 
@@ -27,28 +27,28 @@ namespace SurveyManager.WPF.ViewModels
             set { SetValue(ref _reportDataLocation, value); }
         }
 
-        private string _reportsLocation;
-        public string ReportsLocation
+        private string _reportsDestination;
+        public string ReportsDestination
         {
-            get { return _reportsLocation; }
-            set { SetValue(ref _reportsLocation, value); }
+            get { return _reportsDestination; }
+            set { SetValue(ref _reportsDestination, value); }
         }
 
         public IndividualSurveyWindowViewModel(string surveyName)
         {
-            dataService = new DataService(surveyName);
+            fileService = new FileService(surveyName);
 
             SurveyName = surveyName;
         }
 
         public void ExportTemplates()
         {
-            dataService.ExportTemplates();
+            fileService.ExportTemplates();
         }
 
         public void ImportSurveyData()
         {
-            var location = dataService.ImportData(DataService.DataType.SurveyData);
+            var location = fileService.ImportData(FileService.DataType.SurveyData);
 
             if (string.IsNullOrEmpty(location))
                 return;
@@ -57,11 +57,20 @@ namespace SurveyManager.WPF.ViewModels
 
         public void ImportReportData()
         {
-            var location = dataService.ImportData(DataService.DataType.ReportData);
+            var location = fileService.ImportData(FileService.DataType.ReportData);
 
             if (string.IsNullOrEmpty(location))
                 return;
             ReportDataLocation = location;
+        }
+
+        public void SetReportsDestination()
+        {
+            var location = fileService.SetReportsDestination();
+
+            if (string.IsNullOrEmpty(location))
+                return;
+            ReportsDestination = location;
         }
     }
 }

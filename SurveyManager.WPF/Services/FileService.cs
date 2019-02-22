@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace SurveyManager.WPF.Services
 {
-    public class DataService
+    public class FileService
     {
         private readonly string templateParentFolder;
         private readonly string surveyDataTemplateFileName = "SurveyDataTemplate.csv";
@@ -21,8 +21,9 @@ namespace SurveyManager.WPF.Services
         public string ReportTemplate { get; private set; }
         public string SurveyData { get; private set; }
         public string ReportData { get; private set; }
+        public string ReportsDestination { get; private set; }
 
-        public DataService(string surveyName)
+        public FileService(string surveyName)
         {
             switch (surveyName)
             {
@@ -70,6 +71,20 @@ namespace SurveyManager.WPF.Services
                         break;
                 }
                 return fileDialog.FileName;
+            }
+
+            return string.Empty;
+        }
+
+        public string SetReportsDestination()
+        {
+            var folderBrowserDialog = new FolderBrowserDialog();
+            folderBrowserDialog.Description = "Export reports to folder";
+
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                ReportsDestination = folderBrowserDialog.SelectedPath;
+                return ReportsDestination;
             }
 
             return string.Empty;

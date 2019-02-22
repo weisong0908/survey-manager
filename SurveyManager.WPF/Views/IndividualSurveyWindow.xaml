@@ -39,11 +39,11 @@
                     </DockPanel>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="Step 2: Location to export the survey reports" Margin="5">
+            <GroupBox Header="Step 2: Destination to export the survey reports" Margin="5">
                 <DockPanel>
-                    <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Location for survey reports:"/>
-                    <Button DockPanel.Dock="Right" Width="100" Margin="3">Browse</Button>
-                    <TextBox Margin="3"/>
+                    <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Destination for survey reports:"/>
+                    <Button DockPanel.Dock="Right" Width="100" Margin="3" Click="SetReportsDestination">Browse</Button>
+                    <TextBox Margin="3" Text="{Binding ReportsDestination}"/>
                 </DockPanel>
             </GroupBox>
             <GroupBox Header="Step 3: Generate survey report" Margin="5">

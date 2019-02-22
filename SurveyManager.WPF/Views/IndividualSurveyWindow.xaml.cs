@@ -48,5 +48,10 @@ namespace SurveyManager.WPF.Views
         {
 
         }
+
+        private void SetReportsDestination(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SetReportsDestination();
+        }
     }
 }
