@@ -35,7 +35,7 @@
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" Margin="3" Text="Report data (.csv):"/>
                         <Button DockPanel.Dock="Right" Width="100" Margin="3" Click="ImportReportData">Browse</Button>
-                        <TextBox Margin="3"/>
+                        <TextBox Margin="3" Text="{Binding ReportDataLocation}"/>
                     </DockPanel>
                 </StackPanel>
             </GroupBox>

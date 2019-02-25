@@ -76,7 +76,10 @@ namespace SurveyManager.WPF.ViewModels
 
         public void GenerateReports()
         {
-            reportService = new ReportService(_surveyDataLocation, _reportDataLocation, _reportsDestination);
+            reportService = new ReportService(_surveyDataLocation, _reportDataLocation, _reportsDestination, @"\\csing.navitas.local\shared\Documents\Quality Assurance\Survey\Templates\CUStudentSurveyOnLecturer\ReportTemplate.dotx");
+            reportService.ReadSurveyData();
+            reportService.ReadReportData();
+            reportService.WriteIndividualReports();
         }
     }
 }
