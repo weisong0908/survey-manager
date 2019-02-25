@@ -44,9 +44,9 @@ namespace SurveyManager.WPF.Views
             ViewModel.ImportReportData();
         }
 
-        private void GenerateReport(object sender, RoutedEventArgs e)
+        private void GenerateReports(object sender, RoutedEventArgs e)
         {
-
+            ViewModel.GenerateReports();
         }
 
         private void SetReportsDestination(object sender, RoutedEventArgs e)

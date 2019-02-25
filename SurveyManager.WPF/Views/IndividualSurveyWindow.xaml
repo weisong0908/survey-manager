@@ -47,7 +47,7 @@
                 </DockPanel>
             </GroupBox>
             <GroupBox Header="Step 3: Generate survey report" Margin="5">
-                <Button Margin="3" Width="100" Click="GenerateReport">Start</Button>
+                <Button Margin="3" Width="100" Click="GenerateReports">Start</Button>
             </GroupBox>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1">

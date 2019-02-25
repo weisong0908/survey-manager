@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="Models\SurveyName.cs" />
     <Compile Include="Services\FileService.cs" />
+    <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\WindowService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\IndividualSurveyWindowViewModel.cs" />

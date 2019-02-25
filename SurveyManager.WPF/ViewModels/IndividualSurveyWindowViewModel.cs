@@ -10,6 +10,7 @@ namespace SurveyManager.WPF.ViewModels
     public class IndividualSurveyWindowViewModel : BaseViewModel
     {
         private readonly FileService fileService;
+        private ReportService reportService;
 
         public string SurveyName { get; private set; }
 
@@ -71,6 +72,11 @@ namespace SurveyManager.WPF.ViewModels
             if (string.IsNullOrEmpty(location))
                 return;
             ReportsDestination = location;
+        }
+
+        public void GenerateReports()
+        {
+            reportService = new ReportService(_surveyDataLocation, _reportDataLocation, _reportsDestination);
         }
     }
 }
