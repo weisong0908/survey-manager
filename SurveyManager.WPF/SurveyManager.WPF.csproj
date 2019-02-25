@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\SurveyName.cs" />
+    <Compile Include="Models\SurveyReport.cs" />
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\WindowService.cs" />
