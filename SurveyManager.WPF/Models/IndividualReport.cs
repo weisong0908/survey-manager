@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SurveyManager.WPF.Models
 {
-    public class SurveyReport
+    public class IndividualReport
     {
         public int Id { get; set; }
         public string UnitCode { get; set; }
@@ -17,7 +17,7 @@ namespace SurveyManager.WPF.Models
         public int Response { get; set; }
         public IList<string> Alerts { get; set; }
 
-        public SurveyReport()
+        public IndividualReport()
         {
             Alerts = new List<string>();
         }
