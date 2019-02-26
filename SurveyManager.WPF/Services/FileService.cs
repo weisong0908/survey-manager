@@ -78,8 +78,10 @@ namespace SurveyManager.WPF.Services
 
         public string SetReportsDestination()
         {
-            var folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.Description = "Export reports to folder";
+            var folderBrowserDialog = new FolderBrowserDialog
+            {
+                Description = "Export reports to folder"
+            };
 
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
