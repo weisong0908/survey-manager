@@ -63,6 +63,7 @@
     <Compile Include="Models\SurveyName.cs" />
     <Compile Include="Models\IndividualReport.cs" />
     <Compile Include="Models\SurveyQuestion.cs" />
+    <Compile Include="Models\UnitAndLecturerSurveyEntry.cs" />
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\WindowService.cs" />

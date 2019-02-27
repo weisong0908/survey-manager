@@ -1,4 +1,5 @@
-﻿using SurveyManager.WPF.Services;
+﻿using SurveyManager.WPF.Models;
+using SurveyManager.WPF.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,7 +77,7 @@ namespace SurveyManager.WPF.ViewModels
 
         public void GenerateReports()
         {
-            reportService = new ReportService(_surveyDataLocation, _reportDataLocation, _reportsDestination, @"\\csing.navitas.local\shared\Documents\Quality Assurance\Survey\Templates\CUStudentSurveyOnLecturer\ReportTemplate.dotx");
+            reportService = new ReportService(SurveyName, _surveyDataLocation, _reportDataLocation, _reportsDestination, @"\\csing.navitas.local\shared\Documents\Quality Assurance\Survey\Templates\CUStudentSurveyOnLecturer\ReportTemplate.dotx");
             reportService.GenerateIndividualReport();
         }
     }
