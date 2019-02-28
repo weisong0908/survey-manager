@@ -23,6 +23,7 @@ namespace SurveyManager.WPF.Services
         private int numberOfQuantitativeQuestions;
         private Word.Application app;
         private Word.Document doc;
+        public EventHandler<string> ProgressCompleted;
 
         public ReportService(string surveyName, string surveyDataLocation, string reportDataLocation, string reportsDestination, string reportTemplateLocation)
         {
@@ -33,12 +34,15 @@ namespace SurveyManager.WPF.Services
             this.reportTemplateLocation = reportTemplateLocation;
         }
 
-        public void GenerateIndividualReport()
+        public async Task GenerateIndividualReportAsync()
         {
-            ReadSurveyData();
-            ReadReportData();
-            WriteIndividualReports();
-            WriteStudentSurveyOnLecturerSummaryReport();
+            await Task.Run(() =>
+                {
+                    ReadSurveyData();
+                    ReadReportData();
+                    WriteIndividualReports();
+                    WriteSummaryReport();
+                });
         }
 
         private void ReadSurveyData()
@@ -67,6 +71,8 @@ namespace SurveyManager.WPF.Services
                     }
                 }
             }
+
+            ProgressCompleted?.Invoke(this, "Survey data has been read");
         }
 
         private void ReadReportData()
@@ -87,6 +93,8 @@ namespace SurveyManager.WPF.Services
                     individualReports.Add(new IndividualReport(columns));
                 }
             }
+
+            ProgressCompleted?.Invoke(this, "Report data has been read");
         }
 
         private void WriteIndividualReports()
@@ -108,6 +116,8 @@ namespace SurveyManager.WPF.Services
                 object filename = Path.Combine(reportsDestination, $"{currentIndividualReport.UnitCode} - {currentIndividualReport.Lecturer}.pdf");
                 doc.SaveAs2(filename, Word.WdSaveFormat.wdFormatPDF);
                 doc.Close(Word.WdSaveOptions.wdDoNotSaveChanges);
+
+                ProgressCompleted?.Invoke(this, $" Individual report for {currentIndividualReport.UnitCode} - {currentIndividualReport.Lecturer} has been completed");
             }
 
             app.Quit();
@@ -223,7 +233,7 @@ namespace SurveyManager.WPF.Services
                 ReplaceText("[Flag]", ConvertListToLines(currentIndividualReport.Flags));
         }
 
-        private void WriteStudentSurveyOnLecturerSummaryReport()
+        private void WriteSummaryReport()
         {
             var stringBuilder = new StringBuilder();
             IList<string> header = new List<string>();
@@ -326,6 +336,8 @@ namespace SurveyManager.WPF.Services
             }
 
             File.WriteAllText(Path.Combine(reportsDestination, "SummaryReport.csv"), stringBuilder.ToString());
+
+            ProgressCompleted?.Invoke(this, "Summary report has been completed");
         }
 
         private void ReplaceText(object placeholder, string value)

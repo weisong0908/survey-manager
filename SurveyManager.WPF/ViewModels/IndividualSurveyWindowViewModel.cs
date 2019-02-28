@@ -37,6 +37,13 @@ namespace SurveyManager.WPF.ViewModels
             set { SetValue(ref _reportsDestination, value); }
         }
 
+        private string _progressMessage = "Ready";
+        public string ProgressMessage
+        {
+            get { return _progressMessage; }
+            set { SetValue(ref _progressMessage, value); }
+        }
+
         private bool _isProgressBarRun;
         public bool IsProgressBarRun
         {
@@ -101,18 +108,20 @@ namespace SurveyManager.WPF.ViewModels
             }
 
             reportService = new ReportService(SurveyName, _surveyDataLocation, _reportDataLocation, _reportsDestination, individualReportTemplateLocation);
-
+            reportService.ProgressCompleted += OnProgressCompleted;
             IsProgressBarRun = true;
 
-            Task generateReportTask = new Task(() => reportService.GenerateIndividualReport());
-
-            generateReportTask.Start();
-
-            await generateReportTask;
+            await reportService.GenerateIndividualReportAsync();
 
             IsProgressBarRun = false;
+            ProgressMessage = "Ready";
 
             windowService.ShowMessageBox("The reports have been generated.", "Complete");
+        }
+
+        private void OnProgressCompleted(object sender, string message)
+        {
+            ProgressMessage = message;
         }
     }
 }

@@ -51,9 +51,8 @@
             </GroupBox>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1">
-            <TextBlock/>
-            <TextBlock/>
-            <ProgressBar IsIndeterminate="{Binding IsProgressBarRun}"/>
+            <TextBlock Height="20" Text="{Binding ProgressMessage}"/>
+            <ProgressBar Height="10" IsIndeterminate="{Binding IsProgressBarRun}"/>
         </StackPanel>
     </Grid>
 </Window>
