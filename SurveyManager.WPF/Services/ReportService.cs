@@ -164,7 +164,47 @@ namespace SurveyManager.WPF.Services
 
         private void WriteUnitAndLecturerSurveyInformation()
         {
+            for (int questionNumber = 1; questionNumber <= 6; questionNumber++)
+            {
+                var numberOfStronglyAgree = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.StronglyAgree).Count();
+                var numberOfAgree = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.Agree).Count();
+                var numberOfNeutral = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.Neutral).Count();
+                var numberOfDisagree = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.Disagree).Count();
+                var numberOfStronglyDisagree = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.StronglyDisagree).Count();
+                var numberOfSkipped = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.Skipped).Count();
 
+                ReplaceText($"[Q{questionNumber}SA]", $"{numberOfStronglyAgree.ToString()} ({GetPercentage((double)numberOfStronglyAgree / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}A]", $"{numberOfAgree.ToString()} ({GetPercentage((double)numberOfAgree / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}N]", $"{numberOfNeutral.ToString()} ({GetPercentage((double)numberOfNeutral / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}D]", $"{numberOfDisagree.ToString()} ({GetPercentage((double)numberOfDisagree / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}SD]", $"{numberOfStronglyDisagree.ToString()} ({GetPercentage((double)numberOfStronglyDisagree / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}S]", $"{numberOfSkipped.ToString()} ({GetPercentage((double)numberOfSkipped / currentIndividualReport.ClassSize)})");
+            }
+
+            ReplaceText("[Q7Answer]", ConvertListToLines(currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == 7).Select(q => q.Answer).ToList()));
+            ReplaceText("[Q8Answer]", ConvertListToLines(currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == 8).Select(q => q.Answer).ToList()));
+
+            for (int questionNumber = 9; questionNumber <= 12; questionNumber++)
+            {
+                var numberOfStronglyAgree = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.StronglyAgree).Count();
+                var numberOfAgree = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.Agree).Count();
+                var numberOfNeutral = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.Neutral).Count();
+                var numberOfDisagree = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.Disagree).Count();
+                var numberOfStronglyDisagree = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.StronglyDisagree).Count();
+                var numberOfSkipped = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.Skipped).Count();
+
+                ReplaceText($"[Q{questionNumber}SA]", $"{numberOfStronglyAgree.ToString()} ({GetPercentage((double)numberOfStronglyAgree / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}A]", $"{numberOfAgree.ToString()} ({GetPercentage((double)numberOfAgree / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}N]", $"{numberOfNeutral.ToString()} ({GetPercentage((double)numberOfNeutral / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}D]", $"{numberOfDisagree.ToString()} ({GetPercentage((double)numberOfDisagree / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}SD]", $"{numberOfStronglyDisagree.ToString()} ({GetPercentage((double)numberOfStronglyDisagree / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}S]", $"{numberOfSkipped.ToString()} ({GetPercentage((double)numberOfSkipped / currentIndividualReport.ClassSize)})");
+            }
+
+            ReplaceText("[Q13Answer]", ConvertListToLines(currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == 13).Select(q => q.Answer).ToList()));
+
+            currentIndividualReport.TotalPerformance = (double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree).Count() / (currentIndividualReport.SurveyEntries.Count() * numberOfQuantitativeQuestions);
+            ReplaceText("[Score]", GetPercentage(currentIndividualReport.TotalPerformance));
         }
 
         private void WriteBasicReportInformation()
@@ -186,29 +226,51 @@ namespace SurveyManager.WPF.Services
         private void WriteStudentSurveyOnLecturerSummaryReport()
         {
             var stringBuilder = new StringBuilder();
-
-            IEnumerable<string> header = new List<string>()
+            IList<string> header = new List<string>();
+            if (surveyName == SurveyName.StudentSurveyOnLecturer)
             {
-                "Unit Code",
-                "Unit Name",
-                "Lecturer",
-                "Overall Performance Indicator (%)",
-                "Status",
-                "Number of Flag",
-                "Response Rate (%)",
-                "Response",
-                "Population",
-                "Question 1",
-                "Question 2",
-                "Question 3",
-                "Question 4",
-                "Question 5",
-                "Question 6",
-                "Question 7",
-                "Question 8",
-                "Question 9",
-                "Question 10"
-            };
+                header.Add("Unit Code");
+                header.Add("Unit Name");
+                header.Add("Lecturer");
+                header.Add("Overall Performance Indicator (%)");
+                header.Add("Status");
+                header.Add("Number of Flag");
+                header.Add("Response Rate (%)");
+                header.Add("Response");
+                header.Add("Population");
+                header.Add("Question 1");
+                header.Add("Question 2");
+                header.Add("Question 3");
+                header.Add("Question 4");
+                header.Add("Question 5");
+                header.Add("Question 6");
+                header.Add("Question 7");
+                header.Add("Question 8");
+                header.Add("Question 9");
+                header.Add("Question 10");
+            }
+            else if (surveyName == SurveyName.UnitAndLecturerSurvey)
+            {
+                header.Add("Unit Code");
+                header.Add("Unit Name");
+                header.Add("Lecturer");
+                header.Add("Overall Performance Indicator (%)");
+                header.Add("Status");
+                header.Add("Number of Flag");
+                header.Add("Response Rate (%)");
+                header.Add("Response");
+                header.Add("Population");
+                header.Add("Question 1");
+                header.Add("Question 2");
+                header.Add("Question 3");
+                header.Add("Question 4");
+                header.Add("Question 5");
+                header.Add("Question 6");
+                header.Add("Question 9");
+                header.Add("Question 10");
+                header.Add("Question 11");
+                header.Add("Question 12");
+            }
             stringBuilder.AppendLine(string.Join(",", header.ToArray()));
 
             IList<string> body = new List<string>();
@@ -238,10 +300,27 @@ namespace SurveyManager.WPF.Services
                 body.Add(currentIndividualReport.SurveyEntries.Count().ToString());
                 body.Add(currentIndividualReport.ClassSize.ToString());
 
-                for (int questionNumber = 1; questionNumber <= 10; questionNumber++)
+                if (surveyName == SurveyName.StudentSurveyOnLecturer)
                 {
-                    var performance = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && (q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree)).Count();
-                    body.Add(performance.ToString());
+                    for (int questionNumber = 1; questionNumber <= 10; questionNumber++)
+                    {
+                        var performance = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && (q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree)).Count();
+                        body.Add(performance.ToString());
+                    }
+                }
+                else
+                {
+                    for (int questionNumber = 1; questionNumber <= 6; questionNumber++)
+                    {
+                        var performance = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && (q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree)).Count();
+                        body.Add(performance.ToString());
+                    }
+
+                    for (int questionNumber = 9; questionNumber <= 12; questionNumber++)
+                    {
+                        var performance = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && (q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree)).Count();
+                        body.Add(performance.ToString());
+                    }
                 }
                 stringBuilder.AppendLine(string.Join(",", body.ToArray()));
             }
