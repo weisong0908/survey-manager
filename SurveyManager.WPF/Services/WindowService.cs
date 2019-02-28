@@ -17,5 +17,10 @@ namespace SurveyManager.WPF.Services
 
             window.ShowDialog();
         }
+
+        public void ShowMessageBox(string text, string caption)
+        {
+            MessageBox.Show(text, caption);
+        }
     }
 }

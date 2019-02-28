@@ -11,6 +11,7 @@ namespace SurveyManager.WPF.ViewModels
     public class IndividualSurveyWindowViewModel : BaseViewModel
     {
         private readonly FileService fileService;
+        private WindowService windowService;
         private ReportService reportService;
 
         public string SurveyName { get; private set; }
@@ -36,9 +37,17 @@ namespace SurveyManager.WPF.ViewModels
             set { SetValue(ref _reportsDestination, value); }
         }
 
+        private bool _isProgressBarRun;
+        public bool IsProgressBarRun
+        {
+            get { return _isProgressBarRun; }
+            set { SetValue(ref _isProgressBarRun, value); }
+        }
+
         public IndividualSurveyWindowViewModel(string surveyName)
         {
             fileService = new FileService(surveyName);
+            windowService = new WindowService();
 
             SurveyName = surveyName;
         }
@@ -75,7 +84,7 @@ namespace SurveyManager.WPF.ViewModels
             ReportsDestination = location;
         }
 
-        public void GenerateReports()
+        public async void GenerateReports()
         {
             string individualReportTemplateLocation;
             switch (SurveyName)
@@ -92,7 +101,18 @@ namespace SurveyManager.WPF.ViewModels
             }
 
             reportService = new ReportService(SurveyName, _surveyDataLocation, _reportDataLocation, _reportsDestination, individualReportTemplateLocation);
-            reportService.GenerateIndividualReport();
+
+            IsProgressBarRun = true;
+
+            Task generateReportTask = new Task(() => reportService.GenerateIndividualReport());
+
+            generateReportTask.Start();
+
+            await generateReportTask;
+
+            IsProgressBarRun = false;
+
+            windowService.ShowMessageBox("The reports have been generated.", "Complete");
         }
     }
 }

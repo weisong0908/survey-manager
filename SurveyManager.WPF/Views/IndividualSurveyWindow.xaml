@@ -53,7 +53,7 @@
         <StackPanel Grid.Row="2" Grid.Column="1">
             <TextBlock/>
             <TextBlock/>
-            <ProgressBar/>
+            <ProgressBar IsIndeterminate="{Binding IsProgressBarRun}"/>
         </StackPanel>
     </Grid>
 </Window>
