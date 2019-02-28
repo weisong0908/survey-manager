@@ -90,10 +90,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\IndividualReportTemplateLocations.cs" />
     <Compile Include="Models\QuantitativeChoices.cs" />
     <Compile Include="Models\StudentSurveyOnLecturerSurveyEntry.cs" />
     <Compile Include="Models\SurveyEntry.cs" />
-    <Compile Include="Models\SurveyName.cs" />
+    <Compile Include="Models\SurveyNames.cs" />
     <Compile Include="Models\IndividualReport.cs" />
     <Compile Include="Models\SurveyQuestion.cs" />
     <Compile Include="Models\UnitAndLecturerSurveyEntry.cs" />

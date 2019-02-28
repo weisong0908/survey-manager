@@ -16,7 +16,7 @@ namespace SurveyManager.WPF.Services
         private readonly string surveyDataLocation;
         private readonly string reportDataLocation;
         private readonly string reportsDestination;
-        private object reportTemplate;
+        private object reportTemplateLocation;
         private IList<SurveyEntry> surveyEntries;
         private IList<IndividualReport> individualReports;
         private IndividualReport currentIndividualReport;
@@ -24,13 +24,13 @@ namespace SurveyManager.WPF.Services
         private Word.Application app;
         private Word.Document doc;
 
-        public ReportService(string surveyName, string surveyDataLocation, string reportDataLocation, string reportsDestination, string reportTemplate)
+        public ReportService(string surveyName, string surveyDataLocation, string reportDataLocation, string reportsDestination, string reportTemplateLocation)
         {
             this.surveyName = surveyName;
             this.surveyDataLocation = surveyDataLocation;
             this.reportDataLocation = reportDataLocation;
             this.reportsDestination = reportsDestination;
-            this.reportTemplate = reportTemplate;
+            this.reportTemplateLocation = reportTemplateLocation;
         }
 
         public void GenerateIndividualReport()
@@ -58,10 +58,10 @@ namespace SurveyManager.WPF.Services
 
                     switch (surveyName)
                     {
-                        case SurveyName.StudentSurveyOnLecturer:
+                        case SurveyNames.StudentSurveyOnLecturer:
                             surveyEntries.Add(new StudentSurveyOnLecturerSurveyEntry(row));
                             break;
-                        case SurveyName.UnitAndLecturerSurvey:
+                        case SurveyNames.UnitAndLecturerSurvey:
                             surveyEntries.Add(new UnitAndLecturerSurveyEntry(row));
                             break;
                     }
@@ -98,7 +98,7 @@ namespace SurveyManager.WPF.Services
             foreach (var individualReport in individualReports)
             {
                 currentIndividualReport = individualReport;
-                doc = app.Documents.Add(ref reportTemplate);
+                doc = app.Documents.Add(ref reportTemplateLocation);
 
                 individualReport.SurveyEntries = surveyEntries.Where(se => se.SurveyId == currentIndividualReport.ReportId);
 
@@ -117,10 +117,10 @@ namespace SurveyManager.WPF.Services
         {
             switch (surveyName)
             {
-                case SurveyName.StudentSurveyOnLecturer:
+                case SurveyNames.StudentSurveyOnLecturer:
                     WriteStudentSurveyOnLecturerInformation();
                     break;
-                case SurveyName.UnitAndLecturerSurvey:
+                case SurveyNames.UnitAndLecturerSurvey:
                     WriteUnitAndLecturerSurveyInformation();
                     break;
             }
@@ -227,7 +227,7 @@ namespace SurveyManager.WPF.Services
         {
             var stringBuilder = new StringBuilder();
             IList<string> header = new List<string>();
-            if (surveyName == SurveyName.StudentSurveyOnLecturer)
+            if (surveyName == SurveyNames.StudentSurveyOnLecturer)
             {
                 header.Add("Unit Code");
                 header.Add("Unit Name");
@@ -249,7 +249,7 @@ namespace SurveyManager.WPF.Services
                 header.Add("Question 9");
                 header.Add("Question 10");
             }
-            else if (surveyName == SurveyName.UnitAndLecturerSurvey)
+            else if (surveyName == SurveyNames.UnitAndLecturerSurvey)
             {
                 header.Add("Unit Code");
                 header.Add("Unit Name");
@@ -300,7 +300,7 @@ namespace SurveyManager.WPF.Services
                 body.Add(currentIndividualReport.SurveyEntries.Count().ToString());
                 body.Add(currentIndividualReport.ClassSize.ToString());
 
-                if (surveyName == SurveyName.StudentSurveyOnLecturer)
+                if (surveyName == SurveyNames.StudentSurveyOnLecturer)
                 {
                     for (int questionNumber = 1; questionNumber <= 10; questionNumber++)
                     {

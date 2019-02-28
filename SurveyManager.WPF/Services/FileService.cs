@@ -27,10 +27,10 @@ namespace SurveyManager.WPF.Services
         {
             switch (surveyName)
             {
-                case SurveyName.StudentSurveyOnLecturer:
+                case SurveyNames.StudentSurveyOnLecturer:
                     templateParentFolder = @"\\csing.navitas.local\shared\Documents\Quality Assurance\Survey\Templates\CUStudentSurveyOnLecturer";
                     break;
-                case SurveyName.UnitAndLecturerSurvey:
+                case SurveyNames.UnitAndLecturerSurvey:
                     templateParentFolder = @"\\csing.navitas.local\shared\Documents\Quality Assurance\Survey\Templates\CCUnitAndLecturerSurvey";
                     break;
             }

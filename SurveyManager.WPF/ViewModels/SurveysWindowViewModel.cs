@@ -19,12 +19,12 @@ namespace SurveyManager.WPF.ViewModels
 
         public void GoToStudentSurveyOnLecturerWindow()
         {
-            windowService.ShowWindow(SurveyName.StudentSurveyOnLecturer);
+            windowService.ShowWindow(SurveyNames.StudentSurveyOnLecturer);
         }
 
         public void GoToUnitAndLecturerSurveyWindow()
         {
-            windowService.ShowWindow(SurveyName.UnitAndLecturerSurvey);
+            windowService.ShowWindow(SurveyNames.UnitAndLecturerSurvey);
         }
     }
 }
