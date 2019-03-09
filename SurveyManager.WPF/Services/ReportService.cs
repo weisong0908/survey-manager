@@ -147,12 +147,12 @@ namespace SurveyManager.WPF.Services
                 var numberOfStronglyDisagree = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.StronglyDisagree).Count();
                 var numberOfSkipped = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.Skipped).Count();
 
-                ReplaceText($"[Q{questionNumber}SA]", $"{numberOfStronglyAgree.ToString()} ({GetPercentage((double)numberOfStronglyAgree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}A]", $"{numberOfAgree.ToString()} ({GetPercentage((double)numberOfAgree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}N]", $"{numberOfNeutral.ToString()} ({GetPercentage((double)numberOfNeutral / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}D]", $"{numberOfDisagree.ToString()} ({GetPercentage((double)numberOfDisagree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}SD]", $"{numberOfStronglyDisagree.ToString()} ({GetPercentage((double)numberOfStronglyDisagree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}S]", $"{numberOfSkipped.ToString()} ({GetPercentage((double)numberOfSkipped / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}SA]", $"{numberOfStronglyAgree.ToString()} ({GetPercentage((double)numberOfStronglyAgree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}A]", $"{numberOfAgree.ToString()} ({GetPercentage((double)numberOfAgree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}N]", $"{numberOfNeutral.ToString()} ({GetPercentage((double)numberOfNeutral / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}D]", $"{numberOfDisagree.ToString()} ({GetPercentage((double)numberOfDisagree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}SD]", $"{numberOfStronglyDisagree.ToString()} ({GetPercentage((double)numberOfStronglyDisagree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}S]", $"{numberOfSkipped.ToString()} ({GetPercentage((double)numberOfSkipped / currentIndividualReport.Response)})");
             }
 
             var strengths = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == 11).Select(q => q.Answer).ToList();
@@ -183,12 +183,12 @@ namespace SurveyManager.WPF.Services
                 var numberOfStronglyDisagree = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.StronglyDisagree).Count();
                 var numberOfSkipped = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.Skipped).Count();
 
-                ReplaceText($"[Q{questionNumber}SA]", $"{numberOfStronglyAgree.ToString()} ({GetPercentage((double)numberOfStronglyAgree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}A]", $"{numberOfAgree.ToString()} ({GetPercentage((double)numberOfAgree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}N]", $"{numberOfNeutral.ToString()} ({GetPercentage((double)numberOfNeutral / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}D]", $"{numberOfDisagree.ToString()} ({GetPercentage((double)numberOfDisagree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}SD]", $"{numberOfStronglyDisagree.ToString()} ({GetPercentage((double)numberOfStronglyDisagree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}S]", $"{numberOfSkipped.ToString()} ({GetPercentage((double)numberOfSkipped / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}SA]", $"{numberOfStronglyAgree.ToString()} ({GetPercentage((double)numberOfStronglyAgree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}A]", $"{numberOfAgree.ToString()} ({GetPercentage((double)numberOfAgree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}N]", $"{numberOfNeutral.ToString()} ({GetPercentage((double)numberOfNeutral / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}D]", $"{numberOfDisagree.ToString()} ({GetPercentage((double)numberOfDisagree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}SD]", $"{numberOfStronglyDisagree.ToString()} ({GetPercentage((double)numberOfStronglyDisagree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}S]", $"{numberOfSkipped.ToString()} ({GetPercentage((double)numberOfSkipped / currentIndividualReport.Response)})");
             }
 
             ReplaceText("[Q7Answer]", ConvertListToLines(currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == 7).Select(q => q.Answer).ToList()));
@@ -203,12 +203,12 @@ namespace SurveyManager.WPF.Services
                 var numberOfStronglyDisagree = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.StronglyDisagree).Count();
                 var numberOfSkipped = currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == questionNumber && q.Answer == QuantitativeChoices.Skipped).Count();
 
-                ReplaceText($"[Q{questionNumber}SA]", $"{numberOfStronglyAgree.ToString()} ({GetPercentage((double)numberOfStronglyAgree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}A]", $"{numberOfAgree.ToString()} ({GetPercentage((double)numberOfAgree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}N]", $"{numberOfNeutral.ToString()} ({GetPercentage((double)numberOfNeutral / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}D]", $"{numberOfDisagree.ToString()} ({GetPercentage((double)numberOfDisagree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}SD]", $"{numberOfStronglyDisagree.ToString()} ({GetPercentage((double)numberOfStronglyDisagree / currentIndividualReport.ClassSize)})");
-                ReplaceText($"[Q{questionNumber}S]", $"{numberOfSkipped.ToString()} ({GetPercentage((double)numberOfSkipped / currentIndividualReport.ClassSize)})");
+                ReplaceText($"[Q{questionNumber}SA]", $"{numberOfStronglyAgree.ToString()} ({GetPercentage((double)numberOfStronglyAgree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}A]", $"{numberOfAgree.ToString()} ({GetPercentage((double)numberOfAgree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}N]", $"{numberOfNeutral.ToString()} ({GetPercentage((double)numberOfNeutral / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}D]", $"{numberOfDisagree.ToString()} ({GetPercentage((double)numberOfDisagree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}SD]", $"{numberOfStronglyDisagree.ToString()} ({GetPercentage((double)numberOfStronglyDisagree / currentIndividualReport.Response)})");
+                ReplaceText($"[Q{questionNumber}S]", $"{numberOfSkipped.ToString()} ({GetPercentage((double)numberOfSkipped / currentIndividualReport.Response)})");
             }
 
             ReplaceText("[Q13Answer]", ConvertListToLines(currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == 13).Select(q => q.Answer).ToList()));
