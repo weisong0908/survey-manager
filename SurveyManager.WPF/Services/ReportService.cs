@@ -161,15 +161,20 @@ namespace SurveyManager.WPF.Services
             ReplaceText("[Q11Answer]", ConvertListToLines(strengths));
             ReplaceText("[Q12Answer]", ConvertListToLines(suggestions));
 
+            WriteIndividualQuestionOverallPerformance();
+
+            currentIndividualReport.TotalPerformance = (double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions);
+            ReplaceText("[Score]", GetPercentage(currentIndividualReport.TotalPerformance));
+        }
+
+        private void WriteIndividualQuestionOverallPerformance()
+        {
             ReplaceText("[SA]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyAgree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
             ReplaceText("[A]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Agree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
             ReplaceText("[N]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Neutral).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
             ReplaceText("[D]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Disagree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
             ReplaceText("[SD]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyDisagree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
             ReplaceText("[S]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Skipped).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
-
-            currentIndividualReport.TotalPerformance = (double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions);
-            ReplaceText("[Score]", GetPercentage(currentIndividualReport.TotalPerformance));
         }
 
         private void WriteUnitAndLecturerSurveyInformation()
@@ -212,6 +217,8 @@ namespace SurveyManager.WPF.Services
             }
 
             ReplaceText("[Q13Answer]", ConvertListToLines(currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == 13).Select(q => q.Answer).ToList()));
+
+            WriteIndividualQuestionOverallPerformance();
 
             currentIndividualReport.TotalPerformance = (double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions);
             ReplaceText("[Score]", GetPercentage(currentIndividualReport.TotalPerformance));
