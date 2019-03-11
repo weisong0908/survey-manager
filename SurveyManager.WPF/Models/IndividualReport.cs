@@ -14,7 +14,7 @@ namespace SurveyManager.WPF.Models
         public string Lecturer { get; set; }
         public string StudyTerm { get; set; }
         public int ClassSize { get; set; }
-        public int Response { get; set; }
+        public int Response { get { return SurveyEntries.Count(); } }
         public IEnumerable<SurveyEntry> SurveyEntries { get; set; }
         public IEnumerable<SurveyQuestion> AllQuestions { get { return SurveyEntries.SelectMany(se => se.Questions); } }
         public double TotalPerformance { get; set; }

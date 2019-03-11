@@ -161,14 +161,14 @@ namespace SurveyManager.WPF.Services
             ReplaceText("[Q11Answer]", ConvertListToLines(strengths));
             ReplaceText("[Q12Answer]", ConvertListToLines(suggestions));
 
-            ReplaceText("[SA]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyAgree).Count() / (currentIndividualReport.SurveyEntries.Count() * numberOfQuantitativeQuestions)));
-            ReplaceText("[A]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Agree).Count() / (currentIndividualReport.SurveyEntries.Count() * numberOfQuantitativeQuestions)));
-            ReplaceText("[N]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Neutral).Count() / (currentIndividualReport.SurveyEntries.Count() * numberOfQuantitativeQuestions)));
-            ReplaceText("[D]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Disagree).Count() / (currentIndividualReport.SurveyEntries.Count() * numberOfQuantitativeQuestions)));
-            ReplaceText("[SD]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyDisagree).Count() / (currentIndividualReport.SurveyEntries.Count() * numberOfQuantitativeQuestions)));
-            ReplaceText("[S]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Skipped).Count() / (currentIndividualReport.SurveyEntries.Count() * numberOfQuantitativeQuestions)));
+            ReplaceText("[SA]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyAgree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
+            ReplaceText("[A]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Agree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
+            ReplaceText("[N]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Neutral).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
+            ReplaceText("[D]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Disagree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
+            ReplaceText("[SD]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyDisagree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
+            ReplaceText("[S]", GetPercentage((double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.Skipped).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions)));
 
-            currentIndividualReport.TotalPerformance = (double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree).Count() / (currentIndividualReport.SurveyEntries.Count() * numberOfQuantitativeQuestions);
+            currentIndividualReport.TotalPerformance = (double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions);
             ReplaceText("[Score]", GetPercentage(currentIndividualReport.TotalPerformance));
         }
 
@@ -213,7 +213,7 @@ namespace SurveyManager.WPF.Services
 
             ReplaceText("[Q13Answer]", ConvertListToLines(currentIndividualReport.AllQuestions.Where(q => q.QuestionNumber == 13).Select(q => q.Answer).ToList()));
 
-            currentIndividualReport.TotalPerformance = (double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree).Count() / (currentIndividualReport.SurveyEntries.Count() * numberOfQuantitativeQuestions);
+            currentIndividualReport.TotalPerformance = (double)currentIndividualReport.AllQuestions.Where(q => q.Answer == QuantitativeChoices.StronglyAgree || q.Answer == QuantitativeChoices.Agree).Count() / (currentIndividualReport.Response * numberOfQuantitativeQuestions);
             ReplaceText("[Score]", GetPercentage(currentIndividualReport.TotalPerformance));
         }
 
@@ -223,7 +223,7 @@ namespace SurveyManager.WPF.Services
             ReplaceText("[LecturerName]", currentIndividualReport.Lecturer);
             ReplaceText("[Unit]", $"{currentIndividualReport.UnitCode.ToString()} - {currentIndividualReport.UnitName}");
             ReplaceText("[Population]", currentIndividualReport.ClassSize.ToString());
-            ReplaceText("[Response]", $"{currentIndividualReport.SurveyEntries.Count().ToString()} ({GetPercentage((double)currentIndividualReport.SurveyEntries.Count() / currentIndividualReport.ClassSize)})");
+            ReplaceText("[Response]", $"{currentIndividualReport.Response.ToString()} ({GetPercentage((double)currentIndividualReport.Response / currentIndividualReport.ClassSize)})");
 
             SetFlags();
 
@@ -306,8 +306,8 @@ namespace SurveyManager.WPF.Services
                 body.Add(totalPerformance.ToString());
                 body.Add(status);
                 body.Add(individualReport.Flags.Count.ToString());
-                body.Add(GetPercentage((double)currentIndividualReport.SurveyEntries.Count() / currentIndividualReport.ClassSize));
-                body.Add(currentIndividualReport.SurveyEntries.Count().ToString());
+                body.Add(GetPercentage((double)currentIndividualReport.Response / currentIndividualReport.ClassSize));
+                body.Add(currentIndividualReport.Response.ToString());
                 body.Add(currentIndividualReport.ClassSize.ToString());
 
                 if (surveyName == SurveyNames.StudentSurveyOnLecturer)
@@ -370,13 +370,13 @@ namespace SurveyManager.WPF.Services
 
         private void SetFlags()
         {
-            if (currentIndividualReport.SurveyEntries.Count() == 0)
+            if (currentIndividualReport.Response == 0)
                 currentIndividualReport.Flags.Add("No response collected");
 
             if (currentIndividualReport.ClassSize < 10)
                 currentIndividualReport.Flags.Add("The class size is less than 10 students.");
 
-            if (((double)currentIndividualReport.SurveyEntries.Count() / currentIndividualReport.ClassSize) < 0.2)
+            if (((double)currentIndividualReport.Response / currentIndividualReport.ClassSize) < 0.2)
                 currentIndividualReport.Flags.Add("The response rate is less than 20%.");
         }
     }
